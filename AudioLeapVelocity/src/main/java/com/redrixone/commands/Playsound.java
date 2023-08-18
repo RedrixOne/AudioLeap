@@ -1,7 +1,6 @@
 package com.redrixone.commands;
 
 import com.redrixone.AudioLeap;
-import com.redrixone.storage.DataManager;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.command.SimpleCommand;
 import com.velocitypowered.api.proxy.Player;
@@ -49,8 +48,8 @@ public class Playsound implements SimpleCommand {
         int pitch = Integer.parseInt(args[3]);
 
         try {
-            DataManager.setPlaysoundRequest(targetUUID, true);
-            DataManager.setSound(targetUUID, sound, pitch, volume);
+            //DataManager.setPlaysoundRequest(targetUUID, true);
+            //DataManager.setSound(targetUUID, sound, pitch, volume);
         } catch (Exception e) {
             e.printStackTrace();
         }

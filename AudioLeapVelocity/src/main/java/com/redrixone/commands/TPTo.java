@@ -1,7 +1,6 @@
 package com.redrixone.commands;
 
 import com.redrixone.AudioLeap;
-import com.redrixone.storage.DataManager;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.command.SimpleCommand;
 import com.velocitypowered.api.proxy.Player;
@@ -54,7 +53,7 @@ public class TPTo implements SimpleCommand {
         try {
             player.createConnectionRequest(server.getServer(serverName).get())
                     .fireAndForget();
-            DataManager.saveCoordinates(player.getUniqueId(), x, y, z, true);
+            //DataManager.saveCoordinates(player.getUniqueId(), x, y, z, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
