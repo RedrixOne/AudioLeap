@@ -24,7 +24,6 @@ public class DataManager {
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            e.printStackTrace();
         }
     }
 
