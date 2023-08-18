@@ -1,11 +1,18 @@
 package com.redrixone.commands;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import com.redrixone.AudioLeap;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.command.SimpleCommand;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
+import com.velocitypowered.api.proxy.messages.ChannelIdentifier;
 import net.kyori.adventure.text.Component;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class TPTo implements SimpleCommand {
 
@@ -13,6 +20,7 @@ public class TPTo implements SimpleCommand {
     private final ProxyServer server;
     public AudioLeap audioLeap;
     Component parsed;
+
 
     public TPTo(AudioLeap audioLeap, ProxyServer server) {
         this.server = server;
@@ -45,6 +53,19 @@ public class TPTo implements SimpleCommand {
             source.sendMessage(parsed);
             return;
         }
+
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream(b);
+
+        try {
+            out.writeUTF("PlayerTeleport");
+            out.writeUTF(player.getUsername());
+            player.sendPluginMessage(ChannelIdentifier.class.newInstance(), b.toByteArray());
+        } catch (IOException | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        byte[] data = b.toByteArray();
 
         String serverName = args[0];
         int x = Integer.parseInt(args[1]);
