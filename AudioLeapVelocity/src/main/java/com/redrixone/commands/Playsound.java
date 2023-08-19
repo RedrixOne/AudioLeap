@@ -11,8 +11,6 @@ import com.velocitypowered.api.proxy.ServerConnection;
 import com.velocitypowered.api.proxy.messages.MinecraftChannelIdentifier;
 import net.kyori.adventure.text.Component;
 
-import java.util.UUID;
-
 public class Playsound implements SimpleCommand {
 
 

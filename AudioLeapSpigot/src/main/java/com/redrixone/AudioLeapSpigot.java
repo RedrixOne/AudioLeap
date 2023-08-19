@@ -7,7 +7,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class AudioLeapSpigot extends JavaPlugin {
 
-    Plugin plugin = this;
     public void onEnable() {
         checkIfBungee();
         getServer().getMessenger().registerIncomingPluginChannel(this, "tpto:main", new TPTOMsgListener());
@@ -20,14 +19,12 @@ public class AudioLeapSpigot extends JavaPlugin {
         getLogger().info("AudioLeapSpigot has been disabled!");
     }
 
-    private void checkIfBungee()
-    {
-        if ( !getServer().spigot().getConfig().getConfigurationSection("settings").getBoolean( "bungeecord" ) )
-        {
-            getLogger().severe( "This server is not BungeeCord." );
-            getLogger().severe( "If the server is already hooked to BungeeCord, please enable it into your spigot.yml aswell." );
-            getLogger().severe( "Plugin disabled!" );
-            getServer().getPluginManager().disablePlugin( this );
+    private void checkIfBungee() {
+        if (!getServer().spigot().getConfig().getConfigurationSection("settings").getBoolean("bungeecord")) {
+            getLogger().severe("This server isn't BungeeCord.");
+            getLogger().severe("Please enable it into your spigot.yml.");
+            getLogger().severe("Plugin disabled!");
+            getServer().getPluginManager().disablePlugin(this);
         }
     }
 }
