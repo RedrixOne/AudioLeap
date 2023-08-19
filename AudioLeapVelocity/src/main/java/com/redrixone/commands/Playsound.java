@@ -45,6 +45,7 @@ public class Playsound implements SimpleCommand {
             return;
         }
 
+        String sender = player.getUsername();
         String target = args[0];
         String sound = args[1];
         int volume = Integer.parseInt(args[2]);
@@ -59,6 +60,7 @@ public class Playsound implements SimpleCommand {
         out.writeUTF(sound);
         out.writeInt(volume);
         out.writeInt(pitch);
+        out.writeUTF(sender);
         ServerConnection serverConnection = playerTarget.getCurrentServer().get();
 
         serverConnection.sendPluginMessage(MinecraftChannelIdentifier.from("playsound:main"), out.toByteArray());

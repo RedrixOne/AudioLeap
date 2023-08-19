@@ -2,10 +2,12 @@ package com.redrixone;
 
 import com.redrixone.listeners.PlaysoundMsgListener;
 import com.redrixone.listeners.TPTOMsgListener;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class AudioLeapSpigot extends JavaPlugin {
 
+    Plugin plugin = this;
     public void onEnable() {
         checkIfBungee();
         getServer().getMessenger().registerIncomingPluginChannel(this, "tpto:main", new TPTOMsgListener());
