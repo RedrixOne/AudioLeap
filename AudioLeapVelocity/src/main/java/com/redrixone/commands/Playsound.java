@@ -1,10 +1,14 @@
 package com.redrixone.commands;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import com.redrixone.AudioLeap;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.command.SimpleCommand;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
+import com.velocitypowered.api.proxy.ServerConnection;
+import com.velocitypowered.api.proxy.messages.MinecraftChannelIdentifier;
 import net.kyori.adventure.text.Component;
 
 import java.util.UUID;
@@ -42,17 +46,21 @@ public class Playsound implements SimpleCommand {
         }
 
         String target = args[0];
-        UUID targetUUID = server.getPlayer(target).get().getUniqueId();
         String sound = args[1];
         int volume = Integer.parseInt(args[2]);
         int pitch = Integer.parseInt(args[3]);
 
-        try {
-            //DataManager.setPlaysoundRequest(targetUUID, true);
-            //DataManager.setSound(targetUUID, sound, pitch, volume);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Player playerTarget = server.getPlayer(target).get();
 
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+
+        out.writeUTF("Playsound");
+        out.writeUTF(target);
+        out.writeUTF(sound);
+        out.writeInt(volume);
+        out.writeInt(pitch);
+        ServerConnection serverConnection = playerTarget.getCurrentServer().get();
+
+        serverConnection.sendPluginMessage(MinecraftChannelIdentifier.from("playsound:main"), out.toByteArray());
     }
 }

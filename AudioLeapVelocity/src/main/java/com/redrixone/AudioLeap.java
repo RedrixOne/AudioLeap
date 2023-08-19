@@ -9,6 +9,7 @@ import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
+import com.velocitypowered.api.proxy.messages.MinecraftChannelIdentifier;
 import org.slf4j.Logger;
 
 @Plugin(id = "audioleap",
@@ -27,12 +28,12 @@ public class AudioLeap {
     public AudioLeap(ProxyServer server, Logger logger) {
         this.server = server;
         this.logger = logger;
-
         logger.info("[AudioLeap] Plguin enabled.");
     }
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
+        server.getChannelRegistrar().register(MinecraftChannelIdentifier.from("tpto:main"));
         CommandManager commandManager = server.getCommandManager();
 
         CommandMeta tpto = commandManager.metaBuilder("tpto").build();
