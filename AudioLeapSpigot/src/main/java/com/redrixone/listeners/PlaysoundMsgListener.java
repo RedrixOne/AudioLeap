@@ -2,6 +2,7 @@ package com.redrixone.listeners;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
@@ -19,13 +20,19 @@ public class PlaysoundMsgListener implements PluginMessageListener {
 
         if (subchannel.equalsIgnoreCase("Playsound")) {
             String playerName = in.readUTF();
-            String soundIn = in.readUTF();
+            String soundIn = in.readUTF().toUpperCase();
             int pitch = in.readInt();
             int volume = in.readInt();
             Player target = getPlayer(playerName);
 
+            Sound sound = Sound.valueOf(soundIn);
+
             if (target != null) {
-                target.playSound();
+                try {
+                    target.playSound(target.getLocation(), sound, volume, pitch);
+                } catch (IllegalArgumentException e) {
+
+                }
             }
         }
 

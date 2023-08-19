@@ -40,7 +40,7 @@ public class Playsound implements SimpleCommand {
         String[] args = invocation.arguments();
 
         if (args.length < 2 || args.length > 4) {
-            parsed = Component.text("Usage: /playsound <player> <sound> [volume] [pitch]");
+            parsed = Component.text("Usage: /playsoundv <player> <sound> [volume] [pitch]");
             source.sendMessage(parsed);
             return;
         }

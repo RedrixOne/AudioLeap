@@ -2,6 +2,7 @@ package com.redrixone;
 
 
 import com.google.inject.Inject;
+import com.redrixone.commands.Playsound;
 import com.redrixone.commands.TPTo;
 import com.velocitypowered.api.command.CommandManager;
 import com.velocitypowered.api.command.CommandMeta;
@@ -38,5 +39,8 @@ public class AudioLeap {
 
         CommandMeta tpto = commandManager.metaBuilder("tpto").build();
         commandManager.register(tpto, new TPTo(this, server));
+
+        CommandMeta playsoundv = commandManager.metaBuilder("playsoundv").build();
+        commandManager.register(playsoundv, new Playsound(this, server));
     }
 }
